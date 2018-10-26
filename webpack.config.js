@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
  
 module.exports = {
   entry: {
@@ -17,6 +18,10 @@ module.exports = {
   },
   optimization: {
     minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+      }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
@@ -36,6 +41,7 @@ module.exports = {
   ],
   module: {
     rules: [
+      { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" },
       {
         test: /\.css$/,
         use: [
