@@ -29,6 +29,9 @@ module.exports = {
     new WebpackCleanupPlugin(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      minify: {
+        collapseWhitespace: true,
+      },
     }),
     new HtmlWebpackInlineSVGPlugin({
       runPreEmit: true,
