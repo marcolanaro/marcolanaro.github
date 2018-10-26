@@ -1,8 +1,11 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
  
 module.exports = {
   entry: {
@@ -12,14 +15,34 @@ module.exports = {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'build')
   },
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   plugins: [
     new WebpackCleanupPlugin(),
-    new CopyWebpackPlugin([{ from: 'public', to: '.' }]),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
     new HtmlWebpackInlineSVGPlugin({
       runPreEmit: true,
-    })
-  ]
+    }),
+    new MiniCssExtractPlugin({
+      filename: "styles.css",
+    }),
+    new HTMLInlineCSSWebpackPlugin(),
+    new CopyWebpackPlugin([{ from: 'public', to: '.' }]),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      }
+    ]
+  }
 };

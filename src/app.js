@@ -1,3 +1,5 @@
+import './styles.css';
+
 (() => {
   // CSS Selectors
   const CONTENT = 'content';
