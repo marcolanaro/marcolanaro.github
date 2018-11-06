@@ -7,6 +7,7 @@ const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
  
 module.exports = {
   entry: {
@@ -41,6 +42,11 @@ module.exports = {
     }),
     new HTMLInlineCSSWebpackPlugin(),
     new CopyWebpackPlugin([{ from: 'public', to: '.' }]),
+    new WorkboxPlugin.GenerateSW({
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
   ],
   module: {
     rules: [
