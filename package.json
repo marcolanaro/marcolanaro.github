@@ -38,7 +38,11 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged --single-quote --trailing-comma es5"
+      "pre-commit": "pretty-quick --staged"
     }
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true
   }
 }
