@@ -1,0 +1,9 @@
+export const CONTENT = 'content';
+export const BACK_BUTTON = 'back-button';
+export const BACK_BUTTON_HIDDEN = 'back-button-hidden';
+export const PANEL_HIDE = 'panel-hide';
+export const PANEL_HIDDEN = 'panel-hidden';
+export const CIRCLE = 'circle';
+export const CIRCLE_TRANSPARENT = 'circle-transparent';
+export const ANIMATE_CIRCLE_TRASPARENCY = 'circle-animation-trasparency';
+export const ANIMATE_CIRCLE_EXPAND = 'circle-animate-expand';
