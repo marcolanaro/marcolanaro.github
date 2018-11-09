@@ -7,7 +7,6 @@ import {
   rafFlipClass,
   handleTarget,
   addEventListener,
-  removeTransitionEnd,
 } from '../../utils';
 
 const getSiblingsCircle = compose(
@@ -18,12 +17,8 @@ const getSiblingsCircle = compose(
 const setParentParentDisplay = value => el =>
   (el.parentElement.parentElement.style.display = value);
 
-const removeHandlerSiblingsHide = el =>
-  removeTransitionEnd(handleSiblingsHide)(el);
-
 const handleSiblingsHide = compose(
   setParentParentDisplay('none'),
-  removeHandlerSiblingsHide,
   handleTarget
 );
 
@@ -34,6 +29,7 @@ const hide = pageName =>
       addEventListener({
         event: 'transitionend',
         callback: handleSiblingsHide,
+        once: true,
       }),
       addClass(CIRCLE_TRANSPARENT)
     )

@@ -72,7 +72,11 @@ const animateCircleToHeader = ({ options, scaleCircle, listener }) =>
       addClass(ANIMATE_CIRCLE_EXPAND),
       parent(setTransform(''), addClass(ANIMATE_CIRCLE_EXPAND))
     ),
-    addEventListener({ event: 'transitionend', callback: listener }),
+    addEventListener({
+      event: 'transitionend',
+      callback: listener,
+      once: true,
+    }),
     setTransform(
       `scale(${options.child.before.scaleX}, ${options.child.before.scaleY})`
     ),

@@ -3,7 +3,6 @@ import {
   compose,
   getElementsById,
   addEventListener,
-  removeTransitionEnd,
   addClass,
   handleTarget,
   raf,
@@ -13,17 +12,17 @@ import {
 
 const get = pageName => getElementsById(`panel-${pageName}`);
 
-const removeHandlerPanelHidden = el =>
-  removeTransitionEnd(handlePanelHidden)(el);
-
 const handlePanelHidden = compose(
-  removeHandlerPanelHidden,
   addClass(PANEL_HIDDEN),
   handleTarget
 );
 
 const hide = compose(
-  addEventListener({ event: 'transitionend', callback: handlePanelHidden }),
+  addEventListener({
+    event: 'transitionend',
+    callback: handlePanelHidden,
+    once: true,
+  }),
   addClass(PANEL_HIDE),
   get
 );

@@ -1,12 +1,9 @@
-import { compose, removeTransitionEnd, handleTarget } from '../utils';
+import { compose, handleTarget } from '../utils';
 import BackButton from '../components/backButton';
 import Panel from '../components/panel';
 import headerAnimation from '../components/circles/headerAnimation';
 import Siblings from '../components/circles/siblings';
 import { setPageName, getPageName } from '../state';
-
-const removeHandlerEndOpenCircle = el =>
-  removeTransitionEnd(handleEndOpenCircle)(el);
 
 const handleEndOpenCircle = compose(
   el => {
@@ -14,7 +11,6 @@ const handleEndOpenCircle = compose(
     BackButton.show();
   },
   headerAnimation.cleanUp,
-  removeHandlerEndOpenCircle,
   handleTarget
 );
 

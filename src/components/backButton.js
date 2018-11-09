@@ -30,7 +30,7 @@ const show = compose(
 );
 
 const create = compose(
-  addEventListener({ event: 'click', callback: close }),
+  addEventListener({ event: 'click', callback: close, once: true }),
   child => getFirstElementByClassName(CONTENT).appendChild(child),
   innerHTML(`
     <svg fill="#FFFFFF" viewBox="0 0 24 24">

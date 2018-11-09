@@ -57,24 +57,13 @@ const removeClass = compose(
   _removeClass
 );
 
-const _addEventListener = ({ event, callback }) => el =>
-  el.addEventListener(event, callback);
+const _addEventListener = ({ event, callback, once }) => el =>
+  el.addEventListener(event, callback, { once });
 
 const addEventListener = compose(
   safeAndReturnElement,
   _addEventListener
 );
-
-const _removeEventListener = ({ event, callback }) => el =>
-  el.removeEventListener(event, callback);
-
-const removeEventListener = compose(
-  safeAndReturnElement,
-  _removeEventListener
-);
-
-const removeTransitionEnd = callback => el =>
-  removeEventListener({ event: 'transitionend', callback })(el);
 
 const parent = (...fns) => el => {
   if (el && el.parentElement) {
