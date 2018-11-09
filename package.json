@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "webpack --mode=production",
-    "start": "webpack-dev-server --mode=production"
+    "start": "webpack-dev-server --mode=development"
   },
   "repository": {
     "type": "git",

@@ -1,31 +1,37 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
-const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin')
+  .default;
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
- 
-module.exports = {
+
+const isProd = argv => argv.mode === 'production';
+
+module.exports = (env, argv) => ({
   entry: {
     app: './src/app.js',
   },
   output: {
     filename: '[name].[contenthash].js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
   },
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-      }),
-      new OptimizeCSSAssetsPlugin({})
-    ]
-  },
+  optimization: isProd(argv)
+    ? {
+        minimizer: [
+          new UglifyJsPlugin({
+            cache: true,
+            parallel: true,
+          }),
+          new OptimizeCSSAssetsPlugin({}),
+        ],
+      }
+    : {},
+  devtool: 'inline-source-map',
   plugins: [
     new WebpackCleanupPlugin(),
     new HtmlWebpackPlugin({
@@ -38,7 +44,7 @@ module.exports = {
       runPreEmit: true,
     }),
     new MiniCssExtractPlugin({
-      filename: "styles.css",
+      filename: 'styles.css',
     }),
     new HTMLInlineCSSWebpackPlugin(),
     new CopyWebpackPlugin([{ from: 'public', to: '.' }]),
@@ -50,14 +56,11 @@ module.exports = {
   ],
   module: {
     rules: [
-      { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" },
+      { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader"
-        ]
-      }
-    ]
-  }
-};
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+});
