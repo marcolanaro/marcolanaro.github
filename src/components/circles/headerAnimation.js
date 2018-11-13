@@ -74,7 +74,10 @@ const animateCircleToHeader = ({ options, listener }) =>
     ),
     addEventListener({
       event: 'transitionend',
-      callback: listener,
+      callback: ev => {
+        cleanUp(ev.target);
+        !!listener && listener(ev);
+      },
       once: true,
     }),
     setTransform(

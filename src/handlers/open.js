@@ -13,7 +13,6 @@ const handleEndOpenCircle = compose(
     Panel.show(el.dataset.label);
     BackButton.create();
   },
-  headerAnimation.cleanUp,
   handleTarget
 );
 
