@@ -3,6 +3,7 @@ import BackButton from '../components/backButton';
 import Panel from '../components/panel';
 import headerAnimation from '../components/circles/headerAnimation';
 import Siblings from '../components/circles/siblings';
+import Titles from '../components/circles/titles';
 import { setPageName, getPageName } from '../state';
 
 const handleEndOpenCircle = compose(
@@ -18,6 +19,7 @@ const open = ev => {
   if (!getPageName()) {
     setPageName(ev.target.dataset.label);
     BackButton.create();
+    Titles.hide();
     requestAnimationFrame(() => {
       headerAnimation.start('open', handleEndOpenCircle)(getPageName());
       Siblings.hide(getPageName());

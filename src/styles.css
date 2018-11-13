@@ -91,7 +91,6 @@ nav > ul {
   height: 5rem;
   padding: 1rem;
   border-radius: 100%;
-  box-shadow: 2px 2px 1rem #aaa;
   transition: 0.2s opacity cubic-bezier(0, 0, 0.32, 1);
 }
 .circle-animate-expand {
@@ -147,6 +146,10 @@ nav > ul {
 }
 .circle-profile {
   background-position-x: 0;
+}
+.circleTitle {
+  text-align: center;
+  color: #444;
 }
 .circleContainer-expanded > .circle-profile {
   background-position: 100% 20px;
