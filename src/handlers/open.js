@@ -11,7 +11,7 @@ const handleEndOpenCircle = compose(
   el => {
     TitleHeader.create(el.dataset.label);
     Panel.show(el.dataset.label);
-    BackButton.show();
+    BackButton.create();
   },
   headerAnimation.cleanUp,
   handleTarget
@@ -20,7 +20,6 @@ const handleEndOpenCircle = compose(
 const open = ev => {
   if (!getPageName()) {
     setPageName(ev.target.dataset.label);
-    BackButton.create();
     Titles.hide();
     requestAnimationFrame(() => {
       headerAnimation.start('open', handleEndOpenCircle)(getPageName());

@@ -8,14 +8,13 @@ import TitleHeader from '../components/titleHeader';
 import { setPageName, getPageName } from '../state';
 
 const handleEndCloseCircle = compose(
-  el => BackButton.remove(),
   headerAnimation.cleanUp,
   handleTarget
 );
 
 const close = ev => {
   TitleHeader.remove();
-  BackButton.hide();
+  BackButton.remove();
   Titles.show();
   Panel.hide(getPageName());
   Siblings.show(getPageName());

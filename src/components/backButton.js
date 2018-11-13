@@ -10,26 +10,28 @@ import {
   innerHTML,
   setAttribute,
   createElement,
+  raf,
 } from '../utils';
 
 const get = () => getFirstElementByClassName(BACK_BUTTON);
 
-const remove = compose(
+const unmount = compose(
   removeDOM,
   get
 );
 
-const hide = compose(
+const remove = compose(
+  addEventListener({
+    event: 'transitionend',
+    callback: unmount,
+    once: true,
+  }),
   addClass(BACK_BUTTON_HIDDEN),
   get
 );
 
-const show = compose(
-  removeClass(BACK_BUTTON_HIDDEN),
-  get
-);
-
 const create = compose(
+  raf(raf(removeClass(BACK_BUTTON_HIDDEN))),
   addEventListener({ event: 'click', callback: close, once: true }),
   child => getFirstElementByClassName(CONTENT).appendChild(child),
   innerHTML(`
@@ -45,6 +47,6 @@ const create = compose(
   () => createElement('a')
 );
 
-const BackButton = { create, remove, show, hide };
+const BackButton = { create, remove };
 
 export default BackButton;
