@@ -46,4 +46,5 @@ const create = compose(
 );
 
 const BackButton = { create, remove, show, hide };
+
 export default BackButton;

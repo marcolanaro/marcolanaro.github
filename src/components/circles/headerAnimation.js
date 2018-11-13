@@ -65,7 +65,7 @@ const cleanUp = compose(
 const getParentCircleTransform = ({ scaleX, scaleY, translateX, translateY }) =>
   `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
 
-const animateCircleToHeader = ({ options, scaleCircle, listener }) =>
+const animateCircleToHeader = ({ options, listener }) =>
   compose(
     raf(
       setTransform(`scale(${options.child.after.scale})`),

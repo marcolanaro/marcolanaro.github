@@ -8,3 +8,4 @@ export const CIRCLE_TRANSPARENT = 'circle-transparent';
 export const ANIMATE_CIRCLE_TRASPARENCY = 'circle-animation-trasparency';
 export const ANIMATE_CIRCLE_EXPAND = 'circle-animate-expand';
 export const CIRCLE_TITLE = 'circleTitle';
+export const CIRCLE_TITLE_HEADER = 'circleTitle_header';

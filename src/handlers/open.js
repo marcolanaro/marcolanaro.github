@@ -4,10 +4,12 @@ import Panel from '../components/panel';
 import headerAnimation from '../components/circles/headerAnimation';
 import Siblings from '../components/circles/siblings';
 import Titles from '../components/circles/titles';
+import TitleHeader from '../components/titleHeader';
 import { setPageName, getPageName } from '../state';
 
 const handleEndOpenCircle = compose(
   el => {
+    TitleHeader.create(el.dataset.label);
     Panel.show(el.dataset.label);
     BackButton.show();
   },

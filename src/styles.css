@@ -151,6 +151,22 @@ nav > ul {
   text-align: center;
   color: #444;
 }
+.circleTitle_header {
+  position: absolute;
+  margin: 0;
+  padding: 16px;
+  bottom: 0;
+  width: 100%;
+  line-height: 48px;
+  font-size: 48px;
+  background: linear-gradient(
+    to right,
+    rgba(3, 169, 244, 1),
+    rgba(255, 0, 0, 0)
+  );
+  color: #ffffff;
+  transition: 0.2s transform cubic-bezier(0, 0, 0.32, 1);
+}
 .circleContainer-expanded > .circle-profile {
   background-position: 100% 20px;
 }
