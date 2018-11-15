@@ -47,7 +47,11 @@ module.exports = (env, argv) => ({
       filename: 'styles.css',
     }),
     new HTMLInlineCSSWebpackPlugin(),
-    new CopyWebpackPlugin([{ from: 'public', to: '.' }]),
+    new CopyWebpackPlugin([
+      { from: 'public', to: '.' },
+      { from: './README.md', to: '.' },
+      { from: './LICENSE', to: '.' },
+    ]),
     new WorkboxPlugin.GenerateSW({
       swDest: 'sw.js',
       clientsClaim: true,
