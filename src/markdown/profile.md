@@ -4,9 +4,7 @@ experience.
 
 <figure class="centered">
   <picture class="profile">
-    <source srcset="../../public/images/profile@x1.jpg" media="(max-width: 800px)" />
-    <source srcset="../../public/images/profile@x2.jpg" media="(min-width: 800px)" />
-    <img src="../../public/images/profile@x2.jpg" />
+    <img src="./images/profile.jpg" />
   </picture>
 </figure>
 
