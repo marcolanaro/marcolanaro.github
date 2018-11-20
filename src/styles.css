@@ -12,6 +12,7 @@ body {
   color: #444;
   background-color: #e1f5fe;
   font-family: 'Roboto', sans-serif;
+  font-display: swap;
 }
 ul {
   list-style: none;
