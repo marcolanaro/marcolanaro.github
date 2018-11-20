@@ -1,38 +1,60 @@
-import { PANEL_HIDE, PANEL_HIDDEN } from './css-classes';
+import { CONTENT, PANEL, PANEL_HIDE } from './css-classes';
+import { getContentFromFileName } from '../contents';
 import {
   compose,
-  getElementsById,
   addEventListener,
+  getFirstElementByClassName,
   addClass,
-  handleTarget,
   raf,
   rafFlipClass,
-  removeClass,
+  removeDOM,
+  createElement,
+  innerHTML,
 } from '../utils';
 
-const get = pageName => getElementsById(`panel-${pageName}`);
+const get = () => getFirstElementByClassName(PANEL);
 
-const handlePanelHidden = compose(
-  addClass(PANEL_HIDDEN),
-  handleTarget
+const unmount = compose(
+  removeDOM,
+  get
 );
 
-const hide = compose(
+const remove = compose(
   addEventListener({
     event: 'transitionend',
-    callback: handlePanelHidden,
+    callback: unmount,
     once: true,
   }),
   addClass(PANEL_HIDE),
   get
 );
 
-const show = compose(
-  raf(rafFlipClass(PANEL_HIDE)),
-  removeClass(PANEL_HIDDEN),
-  get
-);
+const appendHTML = page => {
+  getContentFromFileName(page).then(
+    html => (getFirstElementByClassName(PANEL).innerHTML = html)
+  );
+};
 
-const Panel = { show, hide };
+const create = page => {
+  let htmlContent = '';
+  getContentFromFileName(page).then(html => {
+    htmlContent = html;
+  });
+  compose(
+    addEventListener({
+      event: 'transitionend',
+      callback: () => appendHTML(page),
+      once: true,
+    }),
+    raf(rafFlipClass(PANEL_HIDE)),
+    child => getFirstElementByClassName(CONTENT).appendChild(child),
+    // raf because you want to wait for the promise to resolve if cache available
+    raf(innerHTML(htmlContent)),
+    addClass(PANEL),
+    () => createElement('main')
+  )();
+};
+
+const Panel = { create, remove };
 
 export default Panel;

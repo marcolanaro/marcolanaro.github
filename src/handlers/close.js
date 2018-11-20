@@ -11,7 +11,7 @@ const close = ev => {
   TitleHeader.remove();
   BackButton.remove();
   Titles.show();
-  Panel.hide(getPageName());
+  Panel.remove(getPageName());
   Siblings.show(getPageName());
   headerAnimation.start('close', undefined)(getPageName());
   setPageName(undefined);

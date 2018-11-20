@@ -9,6 +9,8 @@ const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const marked = require('marked');
+const renderer = new marked.Renderer();
 
 const isProd = argv => argv.mode === 'production';
 
@@ -64,6 +66,20 @@ module.exports = (env, argv) => ({
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      { test: /\.(png|jpg)$/, use: ['file-loader'] },
+      {
+        test: /\.md$/,
+        use: [
+          { loader: 'html-loader' },
+          {
+            loader: 'markdown-loader',
+            options: {
+              pedantic: true,
+              renderer,
+            },
+          },
+        ],
       },
     ],
   },

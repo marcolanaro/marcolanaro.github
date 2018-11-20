@@ -123,9 +123,6 @@ nav > ul {
   transform: translate(0, 100px);
   opacity: 0;
 }
-.panel-hidden {
-  display: none;
-}
 .back-button {
   position: absolute;
   display: flex;

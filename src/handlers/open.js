@@ -10,7 +10,7 @@ import { setPageName, getPageName } from '../state';
 const handleEndOpenCircle = compose(
   el => {
     TitleHeader.create(el.dataset.label);
-    Panel.show(el.dataset.label);
+    Panel.create(el.dataset.label);
     BackButton.create();
   },
   handleTarget
